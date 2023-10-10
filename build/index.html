@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      eCommerce Dashboard | TailAdmin - Tailwind CSS Admin Dashboard Template
+    </title>
+  <link rel="icon" href="favicon.ico"><link href="style.css" rel="stylesheet"></head>
+
+  <body
+    x-data="{ page: 'ecommerce', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-init="
+         darkMode = JSON.parse(localStorage.getItem('darkMod  '));
+         $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
+  >
+    <!-- ===== Preloader Start ===== -->
+    <div x-show="loaded" x-init="window.addEventListener('DOMContentLoaded', () => {setTimeout(() => loaded = false, 500)})"
+  class="fixed left-0 top-0 z-999999 flex h-screen w-screen items-center justify-center bg-white">
+  <div class="h-16 w-16 animate-spin rounded-full border-4 border-solid border-primary border-t-transparent"></div>
+</div>
+    <!-- ===== Preloader End ===== -->
+
+    <!-- ===== Page Wrapper Start ===== -->
+    <div class="flex h-screen overflow-hidden">
+      <!-- ===== Sidebar Start ===== -->
+      <aside
+  :class="sidebarToggle ? 'translate-x-0' : '-translate-x-full'"
+  class="absolute left-0 top-0 z-9999 flex h-screen w-72.5 flex-col overflow-y-hidden bg-black duration-300 ease-linear dark:bg-boxdark lg:static lg:translate-x-0"
+  @click.outside="sidebarToggle = false"
+>
+  <!-- SIDEBAR HEADER -->
+  <div class="flex items-center justify-between gap-2 px-6 py-5.5 lg:py-6.5">
+    <a href="index.html">
+      <img src="src/images/logo/logo.svg" alt="Logo" />
+    </a>
+
+    <button
+      class="block lg:hidden"
+      @click.stop="sidebarToggle = !sidebarToggle"
+    >
+      <svg
+        class="fill-current"
+        width="20"
+        height="18"
+        viewBox="0 0 20 18"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M19 8.175H2.98748L9.36248 1.6875C9.69998 1.35 9.69998 0.825 9.36248 0.4875C9.02498 0.15 8.49998 0.15 8.16248 0.4875L0.399976 8.3625C0.0624756 8.7 0.0624756 9.225 0.399976 9.5625L8.16248 17.4375C8.31248 17.5875 8.53748 17.7 8.76248 17.7C8.98748 17.7 9.17498 17.625 9.36248 17.475C9.69998 17.1375 9.69998 16.6125 9.36248 16.275L3.02498 9.8625H19C19.45 9.8625 19.825 9.4875 19.825 9.0375C19.825 8.55 19.45 8.175 19 8.175Z"
+          fill=""
+        />
+      </svg>
+    </button>
+  </div>
+  <!-- SIDEBAR HEADER -->
+
+  <div
+    class="no-scrollbar flex flex-col overflow-y-auto duration-300 ease-linear"
+  >
+    <!-- Sidebar Menu -->
+    <nav
+      class="mt-5 py-4 px-4 lg:mt-9 lg:px-6"
+      x-data="{selected: $persist('Dashboard')}"
+    >
+      <!-- Menu Group -->
+      <div>
+        <h3 class="mb-4 ml-4 text-sm font-medium text-bodydark2">MENU</h3>
+
+        <ul class="mb-6 flex flex-col gap-1.5">
+          <!-- Menu Item Dashboard -->
+          <li>
+            <a
+              class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+              href="index.html"
+              :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Dashboard') || (page === 'ecommerce' || page === 'analytics') }"
+            >
+              <svg
+                class="fill-current"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M6.10322 0.956299H2.53135C1.5751 0.956299 0.787598 1.7438 0.787598 2.70005V6.27192C0.787598 7.22817 1.5751 8.01567 2.53135 8.01567H6.10322C7.05947 8.01567 7.84697 7.22817 7.84697 6.27192V2.72817C7.8751 1.7438 7.0876 0.956299 6.10322 0.956299ZM6.60947 6.30005C6.60947 6.5813 6.38447 6.8063 6.10322 6.8063H2.53135C2.2501 6.8063 2.0251 6.5813 2.0251 6.30005V2.72817C2.0251 2.44692 2.2501 2.22192 2.53135 2.22192H6.10322C6.38447 2.22192 6.60947 2.44692 6.60947 2.72817V6.30005Z"
+                  fill=""
+                />
+                <path
+                  d="M15.4689 0.956299H11.8971C10.9408 0.956299 10.1533 1.7438 10.1533 2.70005V6.27192C10.1533 7.22817 10.9408 8.01567 11.8971 8.01567H15.4689C16.4252 8.01567 17.2127 7.22817 17.2127 6.27192V2.72817C17.2127 1.7438 16.4252 0.956299 15.4689 0.956299ZM15.9752 6.30005C15.9752 6.5813 15.7502 6.8063 15.4689 6.8063H11.8971C11.6158 6.8063 11.3908 6.5813 11.3908 6.30005V2.72817C11.3908 2.44692 11.6158 2.22192 11.8971 2.22192H15.4689C15.7502 2.22192 15.9752 2.44692 15.9752 2.72817V6.30005Z"
+                  fill=""
+                />
+                <path
+                  d="M6.10322 9.92822H2.53135C1.5751 9.92822 0.787598 10.7157 0.787598 11.672V15.2438C0.787598 16.2001 1.5751 16.9876 2.53135 16.9876H6.10322C7.05947 16.9876 7.84697 16.2001 7.84697 15.2438V11.7001C7.8751 10.7157 7.0876 9.92822 6.10322 9.92822ZM6.60947 15.272C6.60947 15.5532 6.38447 15.7782 6.10322 15.7782H2.53135C2.2501 15.7782 2.0251 15.5532 2.0251 15.272V11.7001C2.0251 11.4188 2.2501 11.1938 2.53135 11.1938H6.10322C6.38447 11.1938 6.60947 11.4188 6.60947 11.7001V15.272Z"
+                  fill=""
+                />
+                <path
+                  d="M15.4689 9.92822H11.8971C10.9408 9.92822 10.1533 10.7157 10.1533 11.672V15.2438C10.1533 16.2001 10.9408 16.9876 11.8971 16.9876H15.4689C16.4252 16.9876 17.2127 16.2001 17.2127 15.2438V11.7001C17.2127 10.7157 16.4252 9.92822 15.4689 9.92822ZM15.9752 15.272C15.9752 15.5532 15.7502 15.7782 15.4689 15.7782H11.8971C11.6158 15.7782 11.3908 15.5532 11.3908 15.272V11.7001C11.3908 11.4188 11.6158 11.1938 11.8971 11.1938H15.4689C15.7502 11.1938 15.9752 11.4188 15.9752 11.7001V15.272Z"
+                  fill=""
+                />
+              </svg>
+
+              Dashboard
+            </a>
+          </li>
+          <!-- Menu Item Dashboard -->
+
+          <!-- Menu Item Calendar -->
+          <li>
+            <a
+              class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+              href="atur-jadwal.html"
+              @click="selected = (selected === 'Calendar' ? '':'Calendar')"
+              :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Calendar') && (page === 'calendar') }"
+            >
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_906_6516)">
+                  <path
+                    d="M3.45928 0.984375H1.6874C1.04053 0.984375 0.478027 1.51875 0.478027 2.19375V3.96563C0.478027 4.6125 1.0124 5.175 1.6874 5.175H3.45928C4.10615 5.175 4.66865 4.64063 4.66865 3.96563V2.16562C4.64053 1.51875 4.10615 0.984375 3.45928 0.984375ZM3.3749 3.88125H1.77178V2.25H3.3749V3.88125Z"
+                    fill="#DEE4EE"
+                  />
+                  <path
+                    d="M7.22793 3.71251H16.8748C17.2123 3.71251 17.5217 3.43126 17.5217 3.06564C17.5217 2.70001 17.2404 2.41876 16.8748 2.41876H7.22793C6.89043 2.41876 6.58105 2.70001 6.58105 3.06564C6.58105 3.43126 6.89043 3.71251 7.22793 3.71251Z"
+                    fill="#DEE4EE"
+                  />
+                  <path
+                    d="M3.45928 6.75H1.6874C1.04053 6.75 0.478027 7.28437 0.478027 7.95937V9.73125C0.478027 10.3781 1.0124 10.9406 1.6874 10.9406H3.45928C4.10615 10.9406 4.66865 10.4062 4.66865 9.73125V7.95937C4.64053 7.28437 4.10615 6.75 3.45928 6.75ZM3.3749 9.64687H1.77178V8.01562H3.3749V9.64687Z"
+                    fill="#DEE4EE"
+                  />
+                  <path
+                    d="M16.8748 8.21252H7.22793C6.89043 8.21252 6.58105 8.49377 6.58105 8.8594C6.58105 9.22502 6.86231 9.47815 7.22793 9.47815H16.8748C17.2123 9.47815 17.5217 9.1969 17.5217 8.8594C17.5217 8.5219 17.2123 8.21252 16.8748 8.21252Z"
+                    fill="#DEE4EE"
+                  />
+                  <path
+                    d="M3.45928 12.8531H1.6874C1.04053 12.8531 0.478027 13.3875 0.478027 14.0625V15.8344C0.478027 16.4813 1.0124 17.0438 1.6874 17.0438H3.45928C4.10615 17.0438 4.66865 16.5094 4.66865 15.8344V14.0625C4.64053 13.3875 4.10615 12.8531 3.45928 12.8531ZM3.3749 15.75H1.77178V14.1188H3.3749V15.75Z"
+                    fill="#DEE4EE"
+                  />
+                  <path
+                    d="M16.8748 14.2875H7.22793C6.89043 14.2875 6.58105 14.5687 6.58105 14.9344C6.58105 15.3 6.86231 15.5812 7.22793 15.5812H16.8748C17.2123 15.5812 17.5217 15.3 17.5217 14.9344C17.5217 14.5687 17.2123 14.2875 16.8748 14.2875Z"
+                    fill="#DEE4EE"
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_906_6516">
+                    <rect width="18" height="18" fill="white" />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              Atur Jadwal
+            </a>
+          </li>
+          <!-- Menu Item Calendar -->
+
+          <!-- Menu Item Tables -->
+          <li>
+            <a
+              class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+              href="daftar-konsultasi.html"
+              @click="selected = (selected === 'Tables' ? '':'Tables')"
+              :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Tables') && (page === 'Tables') }"
+            >
+              <svg
+                class="fill-current"
+                width="18"
+                height="18"
+                viewBox="0 0 18 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.7499 2.9812H14.2874V2.36245C14.2874 2.02495 14.0062 1.71558 13.6405 1.71558C13.2749 1.71558 12.9937 1.99683 12.9937 2.36245V2.9812H4.97803V2.36245C4.97803 2.02495 4.69678 1.71558 4.33115 1.71558C3.96553 1.71558 3.68428 1.99683 3.68428 2.36245V2.9812H2.2499C1.29365 2.9812 0.478027 3.7687 0.478027 4.75308V14.5406C0.478027 15.4968 1.26553 16.3125 2.2499 16.3125H15.7499C16.7062 16.3125 17.5218 15.525 17.5218 14.5406V4.72495C17.5218 3.7687 16.7062 2.9812 15.7499 2.9812ZM1.77178 8.21245H4.1624V10.9968H1.77178V8.21245ZM5.42803 8.21245H8.38115V10.9968H5.42803V8.21245ZM8.38115 12.2625V15.0187H5.42803V12.2625H8.38115ZM9.64678 12.2625H12.5999V15.0187H9.64678V12.2625ZM9.64678 10.9968V8.21245H12.5999V10.9968H9.64678ZM13.8374 8.21245H16.228V10.9968H13.8374V8.21245ZM2.2499 4.24683H3.7124V4.83745C3.7124 5.17495 3.99365 5.48433 4.35928 5.48433C4.7249 5.48433 5.00615 5.20308 5.00615 4.83745V4.24683H13.0499V4.83745C13.0499 5.17495 13.3312 5.48433 13.6968 5.48433C14.0624 5.48433 14.3437 5.20308 14.3437 4.83745V4.24683H15.7499C16.0312 4.24683 16.2562 4.47183 16.2562 4.75308V6.94683H1.77178V4.75308C1.77178 4.47183 1.96865 4.24683 2.2499 4.24683ZM1.77178 14.5125V12.2343H4.1624V14.9906H2.2499C1.96865 15.0187 1.77178 14.7937 1.77178 14.5125ZM15.7499 15.0187H13.8374V12.2625H16.228V14.5406C16.2562 14.7937 16.0312 15.0187 15.7499 15.0187Z"
+                  fill=""
+                />
+              </svg>
+
+              Daftar Konsultasi
+            </a>
+          </li>
+          <!-- Menu Item Tables -->
+
+          <!-- Menu Item Profile -->
+          <li>
+            <a
+              class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+              href="riwayat-pembayaran.html"
+              @click="selected = (selected === 'Profile' ? '':'Profile')"
+              :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'Profile') && (page === 'profile') }"
+              :class="page === 'profile' && 'bg-graydark'"
+            >
+              <svg
+                width="16"
+                height="18"
+                viewBox="0 0 16 18"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.2875 0.506226H2.7125C1.75625 0.506226 0.96875 1.29373 0.96875 2.24998V15.75C0.96875 16.7062 1.75625 17.5219 2.74063 17.5219H13.3156C14.2719 17.5219 15.0875 16.7344 15.0875 15.75V2.24998C15.0313 1.29373 14.2438 0.506226 13.2875 0.506226ZM13.7656 15.75C13.7656 16.0312 13.5406 16.2562 13.2594 16.2562H2.7125C2.43125 16.2562 2.20625 16.0312 2.20625 15.75V2.24998C2.20625 1.96873 2.43125 1.74373 2.7125 1.74373H13.2875C13.5688 1.74373 13.7938 1.96873 13.7938 2.24998V15.75H13.7656Z"
+                  fill="#DEE4EE"
+                />
+                <path
+                  d="M11.797 2.6156H8.73135C8.2251 2.6156 7.80322 3.03748 7.80322 3.54373V7.25623C7.80322 7.76248 8.2251 8.18435 8.73135 8.18435H11.797C12.3032 8.18435 12.7251 7.76248 12.7251 7.25623V3.5156C12.697 3.03748 12.3032 2.6156 11.797 2.6156ZM11.4313 6.8906H9.06885V3.88123H11.4313V6.8906Z"
+                  fill="#DEE4EE"
+                />
+                <path
+                  d="M3.97822 4.35938H6.03135C6.36885 4.35938 6.67822 4.07812 6.67822 3.7125C6.67822 3.34687 6.39697 3.09375 6.03135 3.09375H3.9501C3.6126 3.09375 3.30322 3.375 3.30322 3.74063C3.30322 4.10625 3.6126 4.35938 3.97822 4.35938Z"
+                  fill="#DEE4EE"
+                />
+                <path
+                  d="M3.97822 7.9312H6.03135C6.36885 7.9312 6.67822 7.64995 6.67822 7.28433C6.67822 6.9187 6.39697 6.63745 6.03135 6.63745H3.9501C3.6126 6.63745 3.30322 6.9187 3.30322 7.28433C3.30322 7.64995 3.6126 7.9312 3.97822 7.9312Z"
+                  fill="#DEE4EE"
+                />
+                <path
+                  d="M12.0782 10.2375H3.97817C3.64067 10.2375 3.3313 10.5187 3.3313 10.8844C3.3313 11.25 3.61255 11.5312 3.97817 11.5312H12.0782C12.4157 11.5312 12.725 11.25 12.725 10.8844C12.725 10.5187 12.4157 10.2375 12.0782 10.2375Z"
+                  fill="#DEE4EE"
+                />
+                <path
+                  d="M12.0782 13.8093H3.97817C3.64067 13.8093 3.3313 14.0906 3.3313 14.4562C3.3313 14.8218 3.61255 15.1031 3.97817 15.1031H12.0782C12.4157 15.1031 12.725 14.8218 12.725 14.4562C12.725 14.0906 12.4157 13.8093 12.0782 13.8093Z"
+                  fill="#DEE4EE"
+                />
+              </svg>
+
+              Riwayat Pembayaran
+            </a>
+          </li>
+          <!-- Menu Item Profile -->
+
+          <!-- Menu Item Auth Pages -->
+          <li>
+            <a
+              class="group relative flex items-center gap-2.5 rounded-sm py-2 px-4 font-medium text-bodydark1 duration-300 ease-in-out hover:bg-graydark dark:hover:bg-meta-4"
+              href="#"
+              @click.prevent="selected = (selected === 'AuthPages' ? '':'AuthPages')"
+              :class="{ 'bg-graydark dark:bg-meta-4': (selected === 'AuthPages') || (page === 'register' || page === 'login' || page === 'forgetPassword') }"
+            >
+              <svg
+                class="fill-current"
+                width="18"
+                height="19"
+                viewBox="0 0 18 19"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <g clip-path="url(#clip0_130_9814)">
+                  <path
+                    d="M12.7127 0.55835H9.53457C8.80332 0.55835 8.18457 1.1771 8.18457 1.90835V3.84897C8.18457 4.18647 8.46582 4.46772 8.80332 4.46772C9.14082 4.46772 9.45019 4.18647 9.45019 3.84897V1.88022C9.45019 1.82397 9.47832 1.79585 9.53457 1.79585H12.7127C13.3877 1.79585 13.9221 2.33022 13.9221 3.00522V15.0709C13.9221 15.7459 13.3877 16.2802 12.7127 16.2802H9.53457C9.47832 16.2802 9.45019 16.2521 9.45019 16.1959V14.2552C9.45019 13.9177 9.16894 13.6365 8.80332 13.6365C8.43769 13.6365 8.18457 13.9177 8.18457 14.2552V16.1959C8.18457 16.9271 8.80332 17.5459 9.53457 17.5459H12.7127C14.0908 17.5459 15.1877 16.4209 15.1877 15.0709V3.03335C15.1877 1.65522 14.0627 0.55835 12.7127 0.55835Z"
+                    fill=""
+                  />
+                  <path
+                    d="M10.4346 8.60205L7.62207 5.7333C7.36895 5.48018 6.97519 5.48018 6.72207 5.7333C6.46895 5.98643 6.46895 6.38018 6.72207 6.6333L8.46582 8.40518H3.45957C3.12207 8.40518 2.84082 8.68643 2.84082 9.02393C2.84082 9.36143 3.12207 9.64268 3.45957 9.64268H8.49395L6.72207 11.4427C6.46895 11.6958 6.46895 12.0896 6.72207 12.3427C6.83457 12.4552 7.00332 12.5114 7.17207 12.5114C7.34082 12.5114 7.50957 12.4552 7.62207 12.3145L10.4346 9.4458C10.6877 9.24893 10.6877 8.85518 10.4346 8.60205Z"
+                    fill=""
+                  />
+                </g>
+                <defs>
+                  <clipPath id="clip0_130_9814">
+                    <rect
+                      width="18"
+                      height="18"
+                      fill="white"
+                      transform="translate(0 0.052124)"
+                    />
+                  </clipPath>
+                </defs>
+              </svg>
+
+              Logout
+            </a>
+          </li>
+          <!-- Menu Item Auth Pages -->
+        </ul>
+      </div>
+    </nav>
+    <!-- Sidebar Menu -->
+  </div>
+</aside>
+
+      <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Content Area Start ===== -->
+      <div
+        class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
+      >
+        <!-- ===== Header Start ===== -->
+        <header
+  class="sticky top-0 z-999 flex w-full bg-white drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none"
+>
+  <div
+    class="flex flex-grow items-center justify-between py-4 px-4 shadow-2 md:px-6 2xl:px-11"
+  >
+    <div class="flex items-center gap-2 sm:gap-4 lg:hidden">
+      <!-- Hamburger Toggle BTN -->
+      <button
+        class="z-99999 block rounded-sm border border-stroke bg-white p-1.5 shadow-sm dark:border-strokedark dark:bg-boxdark lg:hidden"
+        @click.stop="sidebarToggle = !sidebarToggle"
+      >
+        <span class="relative block h-5.5 w-5.5 cursor-pointer">
+          <span class="du-block absolute right-0 h-full w-full">
+            <span
+              class="relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-[0] duration-200 ease-in-out dark:bg-white"
+              :class="{ '!w-full delay-300': !sidebarToggle }"
+            ></span>
+            <span
+              class="relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-150 duration-200 ease-in-out dark:bg-white"
+              :class="{ '!w-full delay-400': !sidebarToggle }"
+            ></span>
+            <span
+              class="relative top-0 left-0 my-1 block h-0.5 w-0 rounded-sm bg-black delay-200 duration-200 ease-in-out dark:bg-white"
+              :class="{ '!w-full delay-500': !sidebarToggle }"
+            ></span>
+          </span>
+          <span class="du-block absolute right-0 h-full w-full rotate-45">
+            <span
+              class="absolute left-2.5 top-0 block h-full w-0.5 rounded-sm bg-black delay-300 duration-200 ease-in-out dark:bg-white"
+              :class="{ '!h-0 delay-[0]': !sidebarToggle }"
+            ></span>
+            <span
+              class="delay-400 absolute left-0 top-2.5 block h-0.5 w-full rounded-sm bg-black duration-200 ease-in-out dark:bg-white"
+              :class="{ '!h-0 dealy-200': !sidebarToggle }"
+            ></span>
+          </span>
+        </span>
+      </button>
+      <!-- Hamburger Toggle BTN -->
+      <a class="block flex-shrink-0 lg:hidden" href="index.html">
+        <img src="src/images/logo/logo-icon.svg" alt="Logo" />
+      </a>
+    </div>
+
+    <div class="flex w-full items-center justify-end gap-3 2xsm:gap-7">
+      <!-- User Area -->
+      <div
+        class="relative"
+        x-data="{ dropdownOpen: false }"
+        @click.outside="dropdownOpen = false"
+      >
+        <a
+          class="flex items-center gap-4"
+          href="#"
+          @click.prevent="dropdownOpen = ! dropdownOpen"
+        >
+          <span class="hidden text-right lg:block">
+            <span
+              class="block text-sm font-medium text-black dark:text-white"
+              id="header-username"
+              >Dimas Rizky</span
+            >
+            <span class="block text-xs font-medium" id="header-user-age"
+              >18 Tahun</span
+            >
+          </span>
+
+          <span class="h-12 w-12 rounded-full">
+            <img src="src/images/user/user-01.png" alt="User" />
+          </span>
+
+          <svg
+            :class="dropdownOpen && 'rotate-180'"
+            class="hidden fill-current sm:block"
+            width="12"
+            height="8"
+            viewBox="0 0 12 8"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              clip-rule="evenodd"
+              d="M0.410765 0.910734C0.736202 0.585297 1.26384 0.585297 1.58928 0.910734L6.00002 5.32148L10.4108 0.910734C10.7362 0.585297 11.2638 0.585297 11.5893 0.910734C11.9147 1.23617 11.9147 1.76381 11.5893 2.08924L6.58928 7.08924C6.26384 7.41468 5.7362 7.41468 5.41077 7.08924L0.410765 2.08924C0.0853277 1.76381 0.0853277 1.23617 0.410765 0.910734Z"
+              fill=""
+            />
+          </svg>
+        </a>
+
+        <!-- Dropdown Start -->
+        <div
+          x-show="dropdownOpen"
+          class="absolute right-0 mt-4 flex w-62.5 flex-col rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+        >
+          <ul
+            class="flex flex-col gap-5 border-b border-stroke px-6 py-7.5 dark:border-strokedark"
+          >
+            <li>
+              <a
+                href="profile.html"
+                class="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+              >
+                <svg
+                  class="fill-current"
+                  width="22"
+                  height="22"
+                  viewBox="0 0 22 22"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M11 9.62499C8.42188 9.62499 6.35938 7.59687 6.35938 5.12187C6.35938 2.64687 8.42188 0.618744 11 0.618744C13.5781 0.618744 15.6406 2.64687 15.6406 5.12187C15.6406 7.59687 13.5781 9.62499 11 9.62499ZM11 2.16562C9.28125 2.16562 7.90625 3.50624 7.90625 5.12187C7.90625 6.73749 9.28125 8.07812 11 8.07812C12.7188 8.07812 14.0938 6.73749 14.0938 5.12187C14.0938 3.50624 12.7188 2.16562 11 2.16562Z"
+                    fill=""
+                  />
+                  <path
+                    d="M17.7719 21.4156H4.2281C3.5406 21.4156 2.9906 20.8656 2.9906 20.1781V17.0844C2.9906 13.7156 5.7406 10.9656 9.10935 10.9656H12.925C16.2937 10.9656 19.0437 13.7156 19.0437 17.0844V20.1781C19.0094 20.8312 18.4594 21.4156 17.7719 21.4156ZM4.53748 19.8687H17.4969V17.0844C17.4969 14.575 15.4344 12.5125 12.925 12.5125H9.07498C6.5656 12.5125 4.5031 14.575 4.5031 17.0844V19.8687H4.53748Z"
+                    fill=""
+                  />
+                </svg>
+                Profil Saya
+              </a>
+            </li>
+            <li>
+            <a href="#"
+              class="flex items-center gap-3.5 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+            >
+              <svg
+                class="fill-current"
+                width="22"
+                height="22"
+                viewBox="0 0 22 22"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.5375 0.618744H11.6531C10.7594 0.618744 10.0031 1.37499 10.0031 2.26874V4.64062C10.0031 5.05312 10.3469 5.39687 10.7594 5.39687C11.1719 5.39687 11.55 5.05312 11.55 4.64062V2.23437C11.55 2.16562 11.5844 2.13124 11.6531 2.13124H15.5375C16.3625 2.13124 17.0156 2.78437 17.0156 3.60937V18.3562C17.0156 19.1812 16.3625 19.8344 15.5375 19.8344H11.6531C11.5844 19.8344 11.55 19.8 11.55 19.7312V17.3594C11.55 16.9469 11.2062 16.6031 10.7594 16.6031C10.3125 16.6031 10.0031 16.9469 10.0031 17.3594V19.7312C10.0031 20.625 10.7594 21.3812 11.6531 21.3812H15.5375C17.2219 21.3812 18.5625 20.0062 18.5625 18.3562V3.64374C18.5625 1.95937 17.1875 0.618744 15.5375 0.618744Z"
+                  fill=""
+                />
+                <path
+                  d="M6.05001 11.7563H12.2031C12.6156 11.7563 12.9594 11.4125 12.9594 11C12.9594 10.5875 12.6156 10.2438 12.2031 10.2438H6.08439L8.21564 8.07813C8.52501 7.76875 8.52501 7.2875 8.21564 6.97812C7.90626 6.66875 7.42501 6.66875 7.11564 6.97812L3.67814 10.4844C3.36876 10.7938 3.36876 11.275 3.67814 11.5844L7.11564 15.0906C7.25314 15.2281 7.45939 15.3312 7.66564 15.3312C7.87189 15.3312 8.04376 15.2625 8.21564 15.125C8.52501 14.8156 8.52501 14.3344 8.21564 14.025L6.05001 11.7563Z"
+                  fill=""
+                />
+              </svg>
+              Keluar
+            </a>
+          </li>
+          </ul>
+        </div>
+        <!-- Dropdown End -->
+      </div>
+      <!-- User Area -->
+    </div>
+  </div>
+</header>
+
+        <!-- ===== Header End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <main>
+          <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div class="mx-auto max-w-242.5">
+              <!-- ====== Profile Section Start -->
+              <div
+                class="mt-[5rem] rounded-sm border border-stroke bg-white shadow-default"
+              >
+                <div class="px-4 pb-6 text-center lg:pb-8 xl:pb-11.5">
+                  <div
+                    class="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3"
+                  >
+                    <div class="relative drop-shadow-2">
+                      <img src="src/images/user/user-06.png" alt="profile" />
+                      <label
+                        for="profile"
+                        class="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
+                      >
+                        <svg
+                          class="fill-current"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M4.76464 1.42638C4.87283 1.2641 5.05496 1.16663 5.25 1.16663H8.75C8.94504 1.16663 9.12717 1.2641 9.23536 1.42638L10.2289 2.91663H12.25C12.7141 2.91663 13.1592 3.101 13.4874 3.42919C13.8156 3.75738 14 4.2025 14 4.66663V11.0833C14 11.5474 13.8156 11.9925 13.4874 12.3207C13.1592 12.6489 12.7141 12.8333 12.25 12.8333H1.75C1.28587 12.8333 0.840752 12.6489 0.512563 12.3207C0.184375 11.9925 0 11.5474 0 11.0833V4.66663C0 4.2025 0.184374 3.75738 0.512563 3.42919C0.840752 3.101 1.28587 2.91663 1.75 2.91663H3.77114L4.76464 1.42638ZM5.56219 2.33329L4.5687 3.82353C4.46051 3.98582 4.27837 4.08329 4.08333 4.08329H1.75C1.59529 4.08329 1.44692 4.14475 1.33752 4.25415C1.22812 4.36354 1.16667 4.51192 1.16667 4.66663V11.0833C1.16667 11.238 1.22812 11.3864 1.33752 11.4958C1.44692 11.6052 1.59529 11.6666 1.75 11.6666H12.25C12.4047 11.6666 12.5531 11.6052 12.6625 11.4958C12.7719 11.3864 12.8333 11.238 12.8333 11.0833V4.66663C12.8333 4.51192 12.7719 4.36354 12.6625 4.25415C12.5531 4.14475 12.4047 4.08329 12.25 4.08329H9.91667C9.72163 4.08329 9.53949 3.98582 9.4313 3.82353L8.43781 2.33329H5.56219Z"
+                            fill=""
+                          />
+                          <path
+                            fill-rule="evenodd"
+                            clip-rule="evenodd"
+                            d="M7.00004 5.83329C6.03354 5.83329 5.25004 6.61679 5.25004 7.58329C5.25004 8.54979 6.03354 9.33329 7.00004 9.33329C7.96654 9.33329 8.75004 8.54979 8.75004 7.58329C8.75004 6.61679 7.96654 5.83329 7.00004 5.83329ZM4.08337 7.58329C4.08337 5.97246 5.38921 4.66663 7.00004 4.66663C8.61087 4.66663 9.91671 5.97246 9.91671 7.58329C9.91671 9.19412 8.61087 10.5 7.00004 10.5C5.38921 10.5 4.08337 9.19412 4.08337 7.58329Z"
+                            fill=""
+                          />
+                        </svg>
+                        <input
+                          type="file"
+                          name="profile"
+                          id="profile"
+                          class="sr-only"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <div class="mt-4">
+                    <h3
+                      class="mb-1.5 text-2xl font-medium text-black dark:text-white"
+                    >
+                      Selamat Datang! <span id="user-name">Dimas</span> :)
+                    </h3>
+                    <p class="font-medium">18 Tahun</p>
+
+                    <div class="grid gap-4 sm:grid-flow-col mx-auto my-[1rem] max-w-180">
+                      <a
+                        href="#"
+                        class="inline-flex items-center justify-center rounded-md border border-stroke bg-white py-4 px-10 text-center font-medium text-black hover:bg-opacity-90 lg:px-8 xl:px-10"
+                      >
+                        Riwayat Konsultasi
+                      </a>
+
+                      <a
+                        href="#"
+                        class="inline-flex items-center justify-center rounded-md bg-primary py-4 px-10 text-center font-medium text-white hover:bg-opacity-90 lg:px-8 xl:px-10"
+                      >
+                        Buat Jadwal Konsultasi
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- ====== Profile Section End -->
+            </div>
+          </div>
+        </main>
+        <!-- ===== Main Content End ===== -->
+      </div>
+      <!-- ===== Content Area End ===== -->
+    </div>
+    <!-- ===== Page Wrapper End ===== -->
+  <script defer src="bundle.js"></script></body>
+</html>

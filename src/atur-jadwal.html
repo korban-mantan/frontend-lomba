@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atur Jadwal Konsultasi</title>
+  </head>
+
+  <body
+    x-data="{ page: 'calendar', 'loaded': true, 'darkMode': true, 'stickyMenu': false, 'sidebarToggle': false, 'scrollTop': false }"
+    x-init="
+          darkMode = JSON.parse(localStorage.getItem('darkMode'));
+          $watch('darkMode', value => localStorage.setItem('darkMode', JSON.stringify(value)))"
+    :class="{'dark text-bodydark bg-boxdark-2': darkMode === true}"
+  >
+    <!-- ===== Preloader Start ===== -->
+    <include src="./partials/preloader.html"></include>
+    <!-- ===== Preloader End ===== -->
+
+    <!-- ===== Page Wrapper Start ===== -->
+    <div class="flex h-screen overflow-hidden">
+      <!-- ===== Sidebar Start ===== -->
+      <include src="./partials/sidebar.html"></include>
+      <!-- ===== Sidebar End ===== -->
+
+      <!-- ===== Content Area Start ===== -->
+      <div
+        class="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden"
+      >
+        <!-- ===== Header Start ===== -->
+        <include src="./partials/header.html" />
+        <!-- ===== Header End ===== -->
+
+        <!-- ===== Main Content Start ===== -->
+        <main>
+          <div class="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10">
+            <div class="mx-auto max-w-7xl">
+              <!-- Breadcrumb Start -->
+              <div
+                class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between"
+              >
+                <h2 class="text-title-md2 font-bold text-black dark:text-white">
+                  Atur Jadwal
+                </h2>
+
+                <nav>
+                  <ol class="flex items-center gap-2">
+                    <li>
+                      <a class="font-medium" href="index.html">Dashboard /</a>
+                    </li>
+                    <li class="text-primary">Jadwal</li>
+                  </ol>
+                </nav>
+              </div>
+              <!-- Breadcrumb End -->
+
+              <!-- ====== Form Jadwal Section Start -->
+              <div
+                class="grid w-full max-w-full justify-items-center rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark"
+              >
+                <div class="w-full border-b border-stroke">
+                  <h2 class="mx-4 my-2 font-bold text-black">Form Jadwal</h2>
+                </div>
+                <form class="grid w-4/5 gap-4 p-4 text-black">
+                  <div class="w-full">
+                    <h2 class="font-bold">Bulan</h2>
+                    <select
+                      class="w-full rounded-md border bg-stroke p-2"
+                      placeholder="Pilih Bulan"
+                      required
+                    >
+                      <option value="" selected disabled hidden>
+                        Pilih Bulan
+                      </option>
+                      <option value="januari">Januari</option>
+                      <option value="februari">Februari</option>
+                      <option value="maret">Maret</option>
+                      <option value="april">April</option>
+                      <option value="mei">Mei</option>
+                      <option value="juni">Juni</option>
+                      <option value="juli">Juli</option>
+                      <option value="agustus">Agustus</option>
+                      <option value="september">September</option>
+                      <option value="oktober">Oktober</option>
+                      <option value="november">November</option>
+                      <option value="desember">Desember</option>
+                    </select>
+                  </div>
+                  <div class="w-full">
+                    <h2 class="font-bold">Hari</h2>
+                    <div
+                      class="grid w-full max-w-screen-sm grid-cols-2 place-items-center gap-2 md:grid-cols-5"
+                    >
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_1"
+                          type="radio"
+                          name="radio1"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_1"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >Senin, 2 Oktober 2023</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_2"
+                          type="radio"
+                          name="radio1"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_2"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >Senin, 9 Oktober 2023</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_3"
+                          type="radio"
+                          name="radio1"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_3"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >Senin, 16 Oktober 2023</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_4"
+                          type="radio"
+                          name="radio1"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_4"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >Senin, 23 Oktober 2023</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_5"
+                          type="radio"
+                          name="radio1"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_5"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >Senin, 30 Oktober 2023</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="w-full">
+                    <h2 class="font-bold">Jam</h2>
+                    <div
+                      class="grid w-full max-w-screen-sm grid-cols-2 place-items-center gap-2 text-center md:grid-cols-5"
+                    >
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_6"
+                          type="radio"
+                          name="radio2"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_6"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >08.00 - 08.40</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_7"
+                          type="radio"
+                          name="radio2"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_7"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >08.40 - 09.20</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_8"
+                          type="radio"
+                          name="radio2"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_8"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >09.20 - 10.00</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_9"
+                          type="radio"
+                          name="radio2"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_9"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >10.00 - 10.40</span
+                          >
+                        </label>
+                      </div>
+                      <div class="w-full">
+                        <input
+                          class="hidden"
+                          id="radio_10"
+                          type="radio"
+                          name="radio2"
+                        />
+                        <label
+                          class="flex cursor-pointer flex-col rounded border-2 border-stroke bg-stroke p-4"
+                          for="radio_10"
+                        >
+                          <span class="text-xs font-semibold uppercase"
+                            >10.40 - 11.20</span
+                          >
+                        </label>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      class="mt-2 border border-stroke bg-white px-4 py-2 text-black hover:border-black"
+                    >
+                      Cek Jadwal
+                    </button>
+                  </div>
+                  <div class="w-full">
+                    <h2 class="font-bold">Upload Pembayaran</h2>
+                    <input
+                      type="file"
+                      class="w-full cursor-pointer rounded-lg border-[1.5px] border-stroke bg-transparent font-medium outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-whiter file:py-3 file:px-5 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-whiter dark:border-form-strokedark dark:bg-form-input dark:file:border-form-strokedark dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary"
+                    />
+                  </div>
+                  <div class="flex w-full justify-end gap-2">
+                    <a
+                      href="index.html"
+                      type="button"
+                      class="rounded border border-stroke bg-white px-4 py-2 text-black hover:border-black"
+                    >
+                      Batalkan
+                    </a>
+                    <button
+                      type="button"
+                      class="rounded border bg-primary px-4 py-2 text-white hover:bg-opacity-70"
+                    >
+                      Buat Pertemuan
+                    </button>
+                  </div>
+                </form>
+              </div>
+              <!-- ====== Form Jadwal Section End -->
+            </div>
+          </div>
+        </main>
+        <!-- ===== Main Content End ===== -->
+      </div>
+      <!-- ===== Content Area End ===== -->
+    </div>
+    <!-- ===== Page Wrapper End ===== -->
+  </body>
+</html>
